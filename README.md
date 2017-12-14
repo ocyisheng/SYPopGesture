@@ -2,14 +2,14 @@
 一键解决pop手势问题
 
 ## 支持
-1.支持自定义leftButtonItem造成的pop手势不可用
-2.支持VC中包含UIScrollView相关view造成的pop手势不可用
-## UIScrollView UICollectionView UIPageViewController MapView UISlider等
-3.支持侧滑和全屏返回手势
-4.支持不同vc的使用不同的手势操作
+*1.支持自定义leftButtonItem造成的pop手势不可用
+*2.支持VC中包含UIScrollView相关view造成的pop手势不可用
+## 如子视图包含UIScrollView UICollectionView UIPageViewController MapView UISlider等，造成的返回手势不可用都可以解决
+*3.支持侧滑和全屏返回手势
+*4.支持不同vc的使用不同的手势操作
 
 ## 安装
-* 将UIViewController+SYPopGesture.h 拖入工程即可实现
+* 将UIViewController+SYPopGesture 扩展拖入工程，导入头文件 #import "UIViewController+SYPopGesture.h",即可使用
 
 ## 使用方式
 * 默认是侧滑手势
