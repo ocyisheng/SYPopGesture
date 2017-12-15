@@ -20,14 +20,25 @@
 }
 
 - (void)syPop_viewDidLoad{
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        //使用自定义的手势替换系统的侧边触发手势，
-        //设置手势的代理
-        [self syPanGesture].delegate = (self.sy_interactivePopDisabled == YES) ? nil : self;
-        //将自定义手势添加到Navigation的view上
-        [self.view addGestureRecognizer:[self syPanGesture]];
+    //这里使用延时消除navigationController可能为空的情况
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    {
+        [self addPanGesutre];
+    }
+    else
+    {
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+              [self addPanGesutre];
+         });
     }
     [self syPop_viewDidLoad];
+}
+- (void)addPanGesutre{
+    //使用自定义的手势替换系统的侧边触发手势，
+    //设置手势的代理
+    [self syPanGesture].delegate = (self.sy_interactivePopDisabled == YES) ? nil : self;
+    //将自定义手势添加到vc的view上
+    [self.view addGestureRecognizer:[self syPanGesture]];
 }
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
@@ -50,12 +61,12 @@
     return ret;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    //当edgePanGesture响应失败时，才响应scrollView的拖动手势
+    //当syPanGesture响应失败时，才响应scrollView的拖动手势
     [otherGestureRecognizer requireGestureRecognizerToFail:gestureRecognizer];
     return YES;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    //当拖动的是slider时，该事件不让edgePanGesture手势响应
+    //当拖动的是slider时，该事件不让syPanGesture手势响应
     if ([touch.view isKindOfClass:[UISlider class]]) {
         return NO;
     }

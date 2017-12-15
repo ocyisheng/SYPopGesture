@@ -9,6 +9,7 @@
 #import "WebViewController.h"
 
 @interface WebViewController ()
+@property (nonatomic,strong) UIWebView *webView;
 
 @end
 
@@ -16,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:self.webView];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]]];
     // Do any additional setup after loading the view from its nib.
 }
 
