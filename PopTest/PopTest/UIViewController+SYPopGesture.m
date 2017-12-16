@@ -21,24 +21,23 @@
 
 - (void)syPop_viewDidLoad{
     //这里使用延时消除navigationController可能为空的情况
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
-    {
-        [self addPanGesutre];
-    }
-    else
-    {
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-              [self addPanGesutre];
-         });
-    }
+     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
+         {
+             [self addPanGesutre];
+         }
+     });
     [self syPop_viewDidLoad];
 }
 - (void)addPanGesutre{
-    //使用自定义的手势替换系统的侧边触发手势，
-    //设置手势的代理
-    [self syPanGesture].delegate = (self.sy_interactivePopDisabled == YES) ? nil : self;
-    //将自定义手势添加到vc的view上
-    [self.view addGestureRecognizer:[self syPanGesture]];
+    //parentViewController考虑到 addChildViewController 的情况；只有当是push出的viewController时，再添加自定义的手势
+    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        //使用自定义的手势替换系统的侧边触发手势，
+        //设置手势的代理
+        [self syPanGesture].delegate = (self.sy_interactivePopDisabled == YES) ? nil : self;
+        //将自定义手势添加到vc的view上
+        [self.view addGestureRecognizer:[self syPanGesture]];
+    }
 }
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
