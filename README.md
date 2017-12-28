@@ -15,6 +15,7 @@
 * 默认是侧滑手势
 * 设置为全屏pop手势    self.sy_isFullPopGesture = YES;
 * 设置手势不可用       self.sy_interactivePopDisabled = YES;
-  
 
+## 详情请看简书
+  * https://www.jianshu.com/p/17e463dec6bf
 
