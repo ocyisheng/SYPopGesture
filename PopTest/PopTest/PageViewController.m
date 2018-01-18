@@ -8,17 +8,14 @@
 
 #import "PageViewController.h"
 
-@interface MyStoryVC : UIViewController
+#import "SYPageViewController.h"
+@interface MyStoryVC : UIViewController<SYPageViewControllerProtocol>
 @property (nonatomic,strong) UILabel *label;
-@property (nonatomic,assign) NSInteger currenPageNumber;//当前的页码，在pageView中的位置
+@property (nonatomic,assign) NSUInteger currenPageNumber;
 @end
 
-@interface PageViewController ()<UIPageViewControllerDelegate, UIPageViewControllerDataSource>
-@property (nonatomic,strong) UIPageViewController *pageVC;
-
-@property (nonatomic,strong) NSMutableArray<MyStoryVC *> *vcArray;
-
-@property (nonatomic,assign) NSInteger maxPages;//最大的页码
+@interface PageViewController ()<SYPageViewControllerDataSource>
+@property (nonatomic,strong) SYPageViewController *pageViewController;
 @property (weak, nonatomic) IBOutlet UIButton *lastButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
@@ -32,135 +29,47 @@
  */
 @implementation PageViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.maxPages = 10;
-    self.pageVC.view.frame = self.view.bounds;
-    [self addChildViewController:self.pageVC];
-    [self.view addSubview:self.pageVC.view];
     
-    MyStoryVC *mvc1 = self.vcArray[0];
-    mvc1.label.text = @"这是第1页";
-    [self.pageVC setViewControllers:@[mvc1] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self.pageViewController addChildViewControllerTo:self];
+    
+    [self.pageViewController showFirstVisiableViewControllerWithPageNumber:0];
+
     [self.view bringSubviewToFront:self.nextButton];
     [self.view bringSubviewToFront:self.lastButton];
-}
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     
-    MyStoryVC *svc = [self nextStroyVCWithCurrentVC:(MyStoryVC *)viewController isAfter:NO];
-    svc.label.text = [NSString stringWithFormat:@"这是第%ld页",svc.currenPageNumber + 1];
-    return svc;
+    /*
+     
+     代理
+     1.initFirstVC
+     2.lastVC 和 nextVC
+     willDisplay nextVC willDisplayLastVC
+     设置
+     1.书脊宽
+     2.翻页类型
+     3
+     */
 }
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
-    MyStoryVC *svc = [self nextStroyVCWithCurrentVC:(MyStoryVC *)viewController isAfter:YES];
-    svc.label.text = [NSString stringWithFormat:@"这是第%ld页",svc.currenPageNumber + 1];
+
+- (UIViewController<SYPageViewControllerProtocol> *)didDisplayVisiableViewController:(UIViewController<SYPageViewControllerProtocol> *)visiableViewController{
+    MyStoryVC *svc= (MyStoryVC *)visiableViewController;
+    svc.label.text = [NSString stringWithFormat:@"这是第%ld页",svc.currenPageNumber];
     return svc;
 }
 
 - (IBAction)lastPage:(id)sender {
-    [self showReverseStoryVC];
+    [self.pageViewController showLastVisiableViewController];
 }
 - (IBAction)nextPage:(id)sender {
-    [self showForwardStoryVC];
+    [self.pageViewController showNextVisiableViewController];
 }
-- (void)showForwardStoryVC{
-    [self showStoryVCWithDirection:UIPageViewControllerNavigationDirectionForward
-                         animation:YES
-                        completion:^(BOOL finished, MyStoryVC *storyVC) {
-         storyVC.label.text = [NSString stringWithFormat:@"这是第%ld页",storyVC.currenPageNumber + 1];
-    }];
-}
-- (void)showReverseStoryVC{
-    [self showStoryVCWithDirection:UIPageViewControllerNavigationDirectionReverse
-                         animation:YES
-                        completion:^(BOOL finished, MyStoryVC *storyVC) {
-         storyVC.label.text = [NSString stringWithFormat:@"这是第%ld页",storyVC.currenPageNumber + 1];
-    }];
-}
-- (void)showStoryVCWithDirection:(UIPageViewControllerNavigationDirection)direction
-                       animation:(BOOL)animation
-                      completion:(void (^ __nullable)(BOOL finished,MyStoryVC *storyVC))completion{
-    
-    BOOL isAfter = (direction == UIPageViewControllerNavigationDirectionForward) ? YES : NO;
-    MyStoryVC *nextVC = [self nextStroyVCWithCurrentVC:self.pageVC.viewControllers.lastObject
-                                               isAfter:isAfter];
-    if (nextVC == nil) {
-        completion(YES,nil);
-        return;
+- (SYPageViewController *)pageViewController{
+    if (_pageViewController == nil) {
+        _pageViewController = [[SYPageViewController alloc]initWithConformsProtocolViewController:NSStringFromClass([MyStoryVC class])];
+        _pageViewController.dataSource = self;
     }
-    [self.pageVC setViewControllers:@[nextVC]
-                          direction:direction
-                           animated:animation
-                         completion:^(BOOL finished) {
-        //调用块
-        completion(finished,nextVC);
-    }];
-}
-- (MyStoryVC *)nextStroyVCWithCurrentVC:(MyStoryVC *)storyVC isAfter:(BOOL)isAfter{
-    if (storyVC == nil){
-        return nil;
-    }
-    
-    NSInteger currenPageNumber = storyVC.currenPageNumber;
-    
-    if (isAfter == YES && currenPageNumber >=self.maxPages- 1){
-        //当前页面是最后一个时，向后滚动，则不再滚动
-        return nil;
-    }else if (isAfter == NO && currenPageNumber <= 0){
-        //当前页面是第一个时，向前滚动，则不再滚动
-        return nil;
-    }
-    
-    NSUInteger vcIndex = [self.vcArray indexOfObject:storyVC];
-    
-    if (isAfter) {
-        
-        if (vcIndex == self.vcArray.count - 1) {
-            vcIndex = 0;
-        }else{
-            //依次向后
-            vcIndex ++;
-        }
-        //下一页码
-        currenPageNumber ++;
-    }else{
-        
-        if (vcIndex == 0) {
-            vcIndex = self.vcArray.count - 1;
-        }else{
-            //依次向前
-            vcIndex --;
-        }
-        //下一页码
-        currenPageNumber --;
-    }
-    MyStoryVC *myVC  = [self.vcArray objectAtIndex:vcIndex];
-    myVC.currenPageNumber = currenPageNumber;
-    return myVC;
-}
-- (UIPageViewController *)pageVC{
-    if (!_pageVC) {
-         NSDictionary *option = @{UIPageViewControllerOptionInterPageSpacingKey:@(10.f)};
-        _pageVC = [[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:option];
-        _pageVC.delegate = self;
-        _pageVC.dataSource = self;
-    }
-    return _pageVC;
-}
-
-- (NSMutableArray<MyStoryVC *> *)vcArray{
-    if (!_vcArray) {
-        _vcArray = [NSMutableArray array];
-        for (int i = 0; i < 3 ; i ++) {
-            MyStoryVC * svc = [[MyStoryVC alloc]init];
-            //初始化
-            svc.currenPageNumber = i;
-            svc.view.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:1.f- i/3.f];
-            [self.vcArray addObject:svc];
-        }
-    }
-    return _vcArray;
+    return _pageViewController;
 }
 @end
 
@@ -178,6 +87,13 @@
     self.label.textAlignment = NSTextAlignmentCenter;
     
     [self.view addSubview:self.label];
+    
 }
 
 @end
+
+
+
+
+
+

@@ -30,6 +30,11 @@
 - (IBAction)pusNextVC:(id)sender {
     
     LeftButtonItemViewController * vc = [[LeftButtonItemViewController alloc]initWithNibName:NSStringFromClass([LeftButtonItemViewController class]) bundle:nil];
+    
+//    UIViewController *vc = [UIViewController new];
+//    vc.view.backgroundColor = [UIColor redColor];
+//    vc.title = @"UIViewController";
+//    vc.sy_isFullPopGesture = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

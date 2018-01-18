@@ -20,6 +20,7 @@
     self.slider.minimumValue = 1.f;
     self.slider.maximumValue = 100.f;
     // Do any additional setup after loading the view from its nib.
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

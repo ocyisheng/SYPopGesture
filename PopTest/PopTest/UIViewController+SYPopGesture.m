@@ -18,16 +18,12 @@
         method_exchangeImplementations(originalMethod, swizzledMethod);
     });
 }
-
 - (void)syPop_viewDidLoad{
-    //这里使用延时消除navigationController可能为空的情况
-     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
-         {
-             [self addPanGesutre];
-         }
-     });
-    [self syPop_viewDidLoad];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self addPanGesutre];
+    });
+     [self syPop_viewDidLoad];
+   
 }
 - (void)addPanGesutre{
     //parentViewController考虑到 addChildViewController 的情况；只有当是push出的viewController时，再添加自定义的手势

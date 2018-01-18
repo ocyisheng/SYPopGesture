@@ -27,6 +27,7 @@
 		5D3E05EF1FE1331500A850C1 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E05EE1FE1331500A850C1 /* BaseViewController.m */; };
 		5D3E05F31FE13EC900A850C1 /* SystemLeftButtonItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E05F11FE13EC900A850C1 /* SystemLeftButtonItemViewController.m */; };
 		5D3E05F41FE13EC900A850C1 /* SystemLeftButtonItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3E05F21FE13EC900A850C1 /* SystemLeftButtonItemViewController.xib */; };
+		5DA798671FE76479005C4ACC /* SYPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA798661FE76479005C4ACC /* SYPageViewController.m */; };
 		5DC409C41FDFE187004E1372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC409C31FDFE187004E1372 /* main.m */; };
 		5DC409C71FDFE188004E1372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC409C61FDFE188004E1372 /* AppDelegate.m */; };
 		5DC409CD1FDFE188004E1372 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC409CB1FDFE188004E1372 /* Main.storyboard */; };
@@ -67,6 +68,8 @@
 		5D3E05F01FE13EC900A850C1 /* SystemLeftButtonItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemLeftButtonItemViewController.h; sourceTree = "<group>"; };
 		5D3E05F11FE13EC900A850C1 /* SystemLeftButtonItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemLeftButtonItemViewController.m; sourceTree = "<group>"; };
 		5D3E05F21FE13EC900A850C1 /* SystemLeftButtonItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemLeftButtonItemViewController.xib; sourceTree = "<group>"; };
+		5DA798651FE76478005C4ACC /* SYPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYPageViewController.h; sourceTree = "<group>"; };
+		5DA798661FE76479005C4ACC /* SYPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYPageViewController.m; sourceTree = "<group>"; };
 		5DC409BF1FDFE187004E1372 /* PopTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC409C31FDFE187004E1372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5DC409C51FDFE187004E1372 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				5D3E05E01FE0F8A800A850C1 /* LeftButtonItemViewController.h */,
 				5D3E05E11FE0F8A800A850C1 /* LeftButtonItemViewController.m */,
 				5D3E05E21FE0F8A800A850C1 /* LeftButtonItemViewController.xib */,
+				5DA798651FE76478005C4ACC /* SYPageViewController.h */,
+				5DA798661FE76479005C4ACC /* SYPageViewController.m */,
 				5D3E05E81FE109E900A850C1 /* PageViewController.h */,
 				5D3E05E91FE109E900A850C1 /* PageViewController.m */,
 				5D3E05EA1FE109E900A850C1 /* PageViewController.xib */,
@@ -249,6 +254,7 @@
 				5D3E05CF1FE0F7EA00A850C1 /* CollectionViewController.m in Sources */,
 				5D3E05EB1FE109E900A850C1 /* PageViewController.m in Sources */,
 				5DC409C41FDFE187004E1372 /* main.m in Sources */,
+				5DA798671FE76479005C4ACC /* SYPageViewController.m in Sources */,
 				5D3E05E31FE0F8A800A850C1 /* LeftButtonItemViewController.m in Sources */,
 				5D3E05CA1FE0BDE800A850C1 /* HomeViewController.m in Sources */,
 				5D3598C71FE25F53006558E6 /* UIViewController+SYPopGesture.m in Sources */,
