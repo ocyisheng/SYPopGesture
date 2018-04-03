@@ -23,14 +23,13 @@
          [self addPanGesutre];
     });
      [self syPop_viewDidLoad];
-   
 }
 - (void)addPanGesutre{
     //parentViewController考虑到 addChildViewController 的情况；只有当是push出的viewController时，再添加自定义的手势
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
         //使用自定义的手势替换系统的侧边触发手势，
         //设置手势的代理
-        [self syPanGesture].delegate = (self.sy_interactivePopDisabled == YES) ? nil : self;
+        [self syPanGesture].delegate = self;
         //将自定义手势添加到vc的view上
         [self.view addGestureRecognizer:[self syPanGesture]];
     }
@@ -46,11 +45,14 @@
     if (self.navigationController.viewControllers.count < 2) {
         return NO;
     }
+    if (self.sy_interactivePopDisabled) {
+        return NO;
+    }
     // 侧滑手势触发位置
     CGPoint location = [gestureRecognizer locationInView:self.view];
     CGPoint offSet = [gestureRecognizer translationInView:gestureRecognizer.view];
     //触发宽度，
-    CGFloat maxLocationX = self.sy_isFullPopGesture == YES ? CGRectGetWidth(self.view.bounds) : 40.f;
+    CGFloat maxLocationX = self.sy_isFullPopGesture == YES ? CGRectGetWidth(self.view.bounds) : 44.f;
     //当是全屏返回手势时，使用整个宽度
     BOOL ret = (0 < offSet.x && location.x <= maxLocationX);
     return ret;
@@ -70,9 +72,6 @@
 #pragma mark - getter setter method
 - (void)setSy_interactivePopDisabled:(BOOL)sy_interactivePopDisabled{
     objc_setAssociatedObject(self, @selector(sy_interactivePopDisabled), @(sy_interactivePopDisabled), OBJC_ASSOCIATION_ASSIGN);
-    //设置手势是否可用
-    [self syPanGesture].delegate = (sy_interactivePopDisabled == YES) ? nil : self;
-    (sy_interactivePopDisabled == YES) ? [self.view removeGestureRecognizer:[self syPanGesture]] : [self.view addGestureRecognizer:[self syPanGesture]];
 }
 - (BOOL)sy_interactivePopDisabled{
     NSNumber *num = objc_getAssociatedObject(self, _cmd);
@@ -88,7 +87,6 @@
         //获取手势响应的方法
         SEL backGestureSelector = NSSelectorFromString(@"handleNavigationTransition:");
         panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:target action:backGestureSelector];
-        
         objc_setAssociatedObject(self, @selector(syPanGesture), panGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return panGesture;
