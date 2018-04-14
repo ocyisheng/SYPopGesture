@@ -27,11 +27,13 @@
 - (void)addPanGesutre{
     //parentViewController考虑到 addChildViewController 的情况；只有当是push出的viewController时，再添加自定义的手势
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-        //使用自定义的手势替换系统的侧边触发手势，
-        //设置手势的代理
-        [self syPanGesture].delegate = self;
-        //将自定义手势添加到vc的view上
-        [self.view addGestureRecognizer:[self syPanGesture]];
+         if (self.navigationController.viewControllers.count > 1) {
+            //使用自定义的手势替换系统的侧边触发手势，
+            //设置手势的代理
+            [self syPanGesture].delegate = self;
+            //将自定义手势添加到vc的view上
+            [self.view addGestureRecognizer:[self syPanGesture]];
+        }
     }
 }
 #pragma mark - UIGestureRecognizerDelegate
