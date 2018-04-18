@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKWebViewController">
             <connections>
+                <outlet property="switch_wkwebGesture" destination="nLh-ab-3W4" id="jXm-DT-OsW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +20,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLh-ab-3W4">
+                    <rect key="frame" x="20" y="556" width="51" height="31"/>
+                    <connections>
+                        <action selector="wk_switchValueChange:" destination="-1" eventType="valueChanged" id="EPS-96-8lu"/>
+                    </connections>
+                </switch>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nLh-ab-3W4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="XoC-BQ-AhL"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="nLh-ab-3W4" secondAttribute="bottom" constant="80" id="aAe-Tp-MYJ"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>

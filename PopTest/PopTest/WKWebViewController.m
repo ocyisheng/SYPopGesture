@@ -11,6 +11,7 @@
 #import <WebKit/WebKit.h>
 @interface WKWebViewController ()
 @property (nonatomic, strong) WKWebView *webView;
+@property (weak, nonatomic) IBOutlet UISwitch *switch_wkwebGesture;
 @end
 
 @implementation WKWebViewController
@@ -23,6 +24,11 @@
     [self.view addSubview:self.webView];
    [ self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
     // Do any additional setup after loading the view from its nib.
+    [self.view bringSubviewToFront:self.switch_wkwebGesture];
+}
+- (IBAction)wk_switchValueChange:(id)sender {
+    //wkwebview 的后退返回手势不可用
+    self.webView.allowsBackForwardNavigationGestures = self.switch_wkwebGesture.isOn;
 }
 
 - (void)didReceiveMemoryWarning {
