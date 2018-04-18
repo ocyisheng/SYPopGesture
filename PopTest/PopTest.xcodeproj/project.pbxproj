@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D27636520874C8200847942 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D27636320874C8200847942 /* WKWebViewController.m */; };
+		5D27636620874C8200847942 /* WKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D27636420874C8200847942 /* WKWebViewController.xib */; };
 		5D3598C71FE25F53006558E6 /* UIViewController+SYPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3598C61FE25F53006558E6 /* UIViewController+SYPopGesture.m */; };
 		5D3598CB1FE26D5D006558E6 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3598C91FE26D5D006558E6 /* WebViewController.m */; };
 		5D3598CC1FE26D5D006558E6 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3598CA1FE26D5D006558E6 /* WebViewController.xib */; };
@@ -37,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D27636220874C8200847942 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
+		5D27636320874C8200847942 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
+		5D27636420874C8200847942 /* WKWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WKWebViewController.xib; sourceTree = "<group>"; };
 		5D3598C51FE25F53006558E6 /* UIViewController+SYPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SYPopGesture.h"; sourceTree = "<group>"; };
 		5D3598C61FE25F53006558E6 /* UIViewController+SYPopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SYPopGesture.m"; sourceTree = "<group>"; };
 		5D3598C81FE26D5D006558E6 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -149,6 +154,9 @@
 				5D3598C81FE26D5D006558E6 /* WebViewController.h */,
 				5D3598C91FE26D5D006558E6 /* WebViewController.m */,
 				5D3598CA1FE26D5D006558E6 /* WebViewController.xib */,
+				5D27636220874C8200847942 /* WKWebViewController.h */,
+				5D27636320874C8200847942 /* WKWebViewController.m */,
+				5D27636420874C8200847942 /* WKWebViewController.xib */,
 				5DC409CB1FDFE188004E1372 /* Main.storyboard */,
 				5DC409CE1FDFE188004E1372 /* Assets.xcassets */,
 				5DC409D01FDFE188004E1372 /* LaunchScreen.storyboard */,
@@ -232,6 +240,7 @@
 				5D3E05DF1FE0F82600A850C1 /* SliderViewController.xib in Resources */,
 				5D3E05DA1FE0F80800A850C1 /* ScrollViewController.xib in Resources */,
 				5D3E05EC1FE109E900A850C1 /* PageViewController.xib in Resources */,
+				5D27636620874C8200847942 /* WKWebViewController.xib in Resources */,
 				5D3E05F41FE13EC900A850C1 /* SystemLeftButtonItemViewController.xib in Resources */,
 				5DC409CF1FDFE188004E1372 /* Assets.xcassets in Resources */,
 				5D3E05E41FE0F8A800A850C1 /* LeftButtonItemViewController.xib in Resources */,
@@ -262,6 +271,7 @@
 				5D3E05F31FE13EC900A850C1 /* SystemLeftButtonItemViewController.m in Sources */,
 				5D3E05DE1FE0F82600A850C1 /* SliderViewController.m in Sources */,
 				5D3E05D91FE0F80800A850C1 /* ScrollViewController.m in Sources */,
+				5D27636520874C8200847942 /* WKWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

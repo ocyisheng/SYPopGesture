@@ -1,26 +1,27 @@
 //
-//  WebViewController.m
+//  WKWebViewController.m
 //  PopTest
 //
-//  Created by 高春阳 on 2017/12/14.
-//  Copyright © 2017年 gao. All rights reserved.
+//  Created by 高春阳 on 2018/4/18.
+//  Copyright © 2018年 gao. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "WKWebViewController.h"
 
-@interface WebViewController ()
-@property (nonatomic,strong) UIWebView *webView;
-
+#import <WebKit/WebKit.h>
+@interface WKWebViewController ()
+@property (nonatomic, strong) WKWebView *webView;
 @end
 
-@implementation WebViewController
+@implementation WKWebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    
+    self.webView = [[WKWebView alloc]initWithFrame:self.view.bounds];
+    self.webView.allowsBackForwardNavigationGestures = YES;
     [self.view addSubview:self.webView];
-     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://m.baidu.com"]]];
-   
+   [ self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titles = @[@"SystemLeftButtonItemView",@"LeftButtonItemView",@"ScrollView",@"CollectionView",@"MapView",@"PageView",@"SliderView"];
+    self.titles = @[@"SystemLeftButtonItemView",@"LeftButtonItemView",@"ScrollView",@"CollectionView",@"MapView",@"PageView",@"SliderView",@"WebView",@"WKWebView"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

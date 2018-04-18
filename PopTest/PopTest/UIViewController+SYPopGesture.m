@@ -8,6 +8,7 @@
 
 #import "UIViewController+SYPopGesture.h"
 #import <objc/runtime.h>
+#import <WebKit/WebKit.h>
 
 @implementation UIViewController (SYPopGesture)
 + (void)load{
@@ -65,11 +66,28 @@
     return YES;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    //当self.view添加有WKWebView时，适配 wkwebView.allowsBackForwardNavigationGestures == YES 手势
+    if ([self sy_wkWebViewCanallowsBackForwardNavigationGestures]) {
+        return NO;
+    }
     //当拖动的是slider时，该事件不让syPanGesture手势响应
     if ([touch.view isKindOfClass:[UISlider class]]) {
         return NO;
     }
     return YES;
+}
+- (BOOL )sy_wkWebViewCanallowsBackForwardNavigationGestures{
+    __block WKWebView *webView = nil;
+    [self.view.subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[WKWebView class]]) {
+            webView = obj;
+            *stop = YES;
+        }
+    }];
+    if (webView.allowsBackForwardNavigationGestures == YES && webView.canGoBack == YES) {
+        return YES;
+    }
+    return NO;
 }
 #pragma mark - getter setter method
 - (void)setSy_interactivePopDisabled:(BOOL)sy_interactivePopDisabled{
