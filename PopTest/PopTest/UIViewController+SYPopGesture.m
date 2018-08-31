@@ -38,7 +38,11 @@
     }
 }
 #pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] == NO) {
+        //消除可能存在的其他手势响应问题
+        return NO;
+    }
     if ([[self.navigationController valueForKey:@"_isTransitioning"] boolValue]) {
         return NO;
     }
@@ -51,9 +55,10 @@
     if (self.sy_interactivePopDisabled) {
         return NO;
     }
+    UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer *)gestureRecognizer;
     // 侧滑手势触发位置
-    CGPoint location = [gestureRecognizer locationInView:self.view];
-    CGPoint offSet = [gestureRecognizer translationInView:gestureRecognizer.view];
+    CGPoint location = [panGesture locationInView:self.view];
+    CGPoint offSet = [panGesture translationInView:panGesture.view];
     //触发宽度，
     CGFloat maxLocationX = self.sy_isFullPopGesture == YES ? CGRectGetWidth(self.view.bounds) : 44.f;
     //当是全屏返回手势时，使用整个宽度
