@@ -3,7 +3,7 @@
 
 ## 支持
 * 支持自定义leftButtonItem造成的pop手势不可用
-* 支持VC中包含UIScrollView相关view造成的pop手势不可用
+* 支持VC中包含UIScrollView相关子类view造成的pop手势不可用
 * 支持子视图是WKWebView时,wkwebView.allowsBackForwardNavigationGestures = YES,后退手势和侧滑手势的冲突
 ## 如子视图包含UIScrollView UICollectionView UIPageViewController MapView UIWebView WKWebView UISlider等，造成的返回手势不可用或这些子视图的手势难以识别都可以解决
 * 支持侧滑和全屏返回手势
